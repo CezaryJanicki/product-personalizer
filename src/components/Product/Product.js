@@ -23,6 +23,27 @@ const Product = props => {
     setAdditionalPrice(size.additionalPrice);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    prepareOrder();
+    console.log(prepareOrder());
+    console.log('Summary');
+    console.log('===============');
+    console.log('Name: ', props.title);
+    console.log('Price: ', getPrice());
+    console.log('Size: ',currentSize);
+    console.log('Color: ', currentColor);
+  };
+
+  const prepareOrder = () => {
+    return {
+      title: props.title,
+      price: getPrice(),
+      color: currentColor,
+      size: currentSize,
+    };
+  };
+
   return (
 
     <article className={styles.product}>
@@ -37,7 +58,7 @@ const Product = props => {
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
