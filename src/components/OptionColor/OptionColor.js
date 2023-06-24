@@ -1,9 +1,9 @@
 import Product from '../Product/Product';
-import styles from './ProductColor.module.scss';
+import styles from './OptionColor.module.scss';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-const ProductColor = (props) => {
+const OptionColor = (props) => {
 
     const prepareColorClassName = (color) => {
         return styles[`color${color.charAt(0).toUpperCase() + color.slice(1)}`];
@@ -29,9 +29,9 @@ const ProductColor = (props) => {
     );
 }
 
-export default ProductColor;
+export default OptionColor;
 
-ProductColor.propTypes = {
+OptionColor.propTypes = {
     colors: PropTypes.array.isRequired,
     currentColor: PropTypes.string.isRequired,
     setCurrentColor: PropTypes.func.isRequired,

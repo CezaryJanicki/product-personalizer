@@ -2,7 +2,7 @@ import styles from './ProductForm.module.scss';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Button from '../Button/Button';
-import ProductColor from '../ProductColor/ProductColor';
+import ProductColor from '../OptionColor/OptionColor';
 
 const ProductForm = (props) => {
 
