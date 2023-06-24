@@ -9,6 +9,20 @@ const Product = props => {
   const [currentPrice, setCurrentPrice] = useState(props.basePrice);
   const [additionalPrice, setAdditionalPrice] = useState(props.sizes[0].additionalPrice);
 
+  const prepareColorClassName = (color) => {
+    return styles[`color${color.charAt(0).toUpperCase() + color.slice(1)}`];
+  };
+
+  const getPrice = () => {
+    return currentPrice + additionalPrice;
+  };
+
+  const handleSizeSelection = (size) => {
+    setCurrentSize(size.name);
+    setCurrentPrice(props.basePrice);
+    setAdditionalPrice(size.additionalPrice);
+  };
+
   return (
 
     <article className={styles.product}>
@@ -21,7 +35,7 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
@@ -31,7 +45,7 @@ const Product = props => {
                   <li key={size.name}>
                     <button
                       type='button'
-                      onClick={() => setCurrentSize(size)}
+                      onClick={() => {setCurrentSize(size); handleSizeSelection(size)}}
                       className={clsx({ [styles.active]: currentSize === size })}
                     >
                       {size.name}
@@ -48,12 +62,9 @@ const Product = props => {
                     <button
                       type='button'
                       onClick={() => setCurrentColor(color)}
-                      className={clsx(
-                        styles[
-                          `color${color.charAt(0).toUpperCase() + color.slice(1)}`
-                        ],
-                        { [styles.active]: currentColor === color }
-                      )}
+                      className={clsx(prepareColorClassName(color), {
+                        [styles.active]: currentColor === color,
+                      })}
                     ></button>
                   </li>
                 ))}
