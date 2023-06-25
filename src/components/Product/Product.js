@@ -1,21 +1,18 @@
 import styles from './Product.module.scss';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductImage from '../ProductImage/ProductImage'
 import ProductForm from '../ProductForm/ProductForm'
 
 const Product = props => {
-
 
   const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentPrice, setCurrentPrice] = useState(props.basePrice);
   const [additionalPrice, setAdditionalPrice] = useState(props.sizes[0].additionalPrice);
 
-
-
-  const getPrice = () => {
+  const getPrice = useMemo(() => {
     return currentPrice + additionalPrice;
-  };
+  }, [currentPrice, additionalPrice]);
 
   const handleSizeSelection = (size) => {
     setCurrentSize(size.name);
@@ -26,14 +23,13 @@ const Product = props => {
   const prepareOrder = () => {
     return {
       title: props.title,
-      price: getPrice(),
+      price: getPrice,
       color: currentColor,
       size: currentSize,
     };
   };
 
   return (
-
     <article className={styles.product}>
     <ProductImage name={props.name} currentColor={currentColor}/>
     <ProductForm title={props.title}
@@ -47,7 +43,6 @@ const Product = props => {
         prepareOrder={prepareOrder}
         getPrice={getPrice}
         handleSizeSelection={handleSizeSelection}/>
-
     </article>
   )
 };
