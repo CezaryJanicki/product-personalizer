@@ -1,12 +1,11 @@
 import styles from './ProductForm.module.scss';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import Button from '../Button/Button';
-import ProductColor from '../OptionColor/OptionColor';
+import OptionColor from '../OptionColor/OptionColor';
+import OptionSize from '../OptionSize/OptionSize';
+
 
 const ProductForm = (props) => {
-
-
 
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +19,6 @@ const ProductForm = (props) => {
         console.log('Color: ', props.currentColor);
       };
 
-
     return(
         <div>
         <header>
@@ -29,23 +27,8 @@ const ProductForm = (props) => {
         </header>
 
         <form onSubmit={handleSubmit}>
-          <div className={styles.sizes}>
-            <h3 className={styles.optionLabel}>Sizes</h3>
-            <ul className={styles.choices}>
-              {props.sizes.map((size) => (
-                  <li key={size.name}>
-                    <button
-                      type='button'
-                      onClick={() => {props.setCurrentSize(size); props.handleSizeSelection(size)}}
-                      className={clsx({ [styles.active]: props.currentSize === size })}
-                    >
-                      {size.name}
-                    </button>
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <ProductColor
+         <OptionSize sizes={props.sizes} currentSize={props.currentSize} setCurrentSize={props.setCurrentSize} handleSizeSelection={props.handleSizeSelection}/>
+          <OptionColor
           colors={props.colors}
           currentColor={props.currentColor}
           setCurrentColor={props.setCurrentColor}/>

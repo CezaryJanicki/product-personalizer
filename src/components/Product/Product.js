@@ -1,6 +1,4 @@
 import styles from './Product.module.scss';
-
-
 import { useState } from 'react';
 import ProductImage from '../ProductImage/ProductImage'
 import ProductForm from '../ProductForm/ProductForm'

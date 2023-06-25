@@ -1,4 +1,3 @@
-import Product from '../Product/Product';
 import styles from './OptionColor.module.scss';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
